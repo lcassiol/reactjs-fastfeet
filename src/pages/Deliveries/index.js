@@ -1,18 +1,53 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { MdAdd } from 'react-icons/md';
 import { useHistory } from 'react-router-dom';
+import { parseISO, format } from 'date-fns';
 
 import api from '~/services/api';
 
 import Top from '~/components/Top';
 import SearchInput from '~/components/Form/SearchInput';
 import IconButton from '~/components/Button/IconButton';
-// import { Container } from './styles';
+
+import DeliveryItem from './components/DeliveryItem';
+
+import { Grid, Button } from './styles';
 
 export default function Deliveries() {
   const history = useHistory();
 
+  const [deliveries, setDeliveries] = useState([]);
+  const [page, setPage] = useState(1);
+
+  useEffect(() => {
+    loadDeliveries();
+  }, [page]);
+
+  function formatDates(data) {
+    return data.map((delivery) => ({
+      ...delivery,
+      start_dateFormated: delivery.start_date
+        ? format(parseISO(delivery.start_date), 'dd/MM/yyyy')
+        : null,
+      end_dateFormated: delivery.end_date
+        ? format(parseISO(delivery.end_date), 'dd/MM/yyyy')
+        : null,
+    }));
+  }
+
   function handleSearch() {}
+
+  async function loadDeliveries() {
+    const response = await api.get('/delivery', {
+      params: {
+        page,
+      },
+    });
+
+    const data = formatDates(response.data);
+
+    setDeliveries(data);
+  }
 
   return (
     <>
@@ -29,6 +64,41 @@ export default function Deliveries() {
           type="button"
         />
       </Top>
+
+      <Grid>
+        <section>
+          <strong>ID</strong>
+          <strong>Destinatário</strong>
+          <strong>Produto</strong>
+          <strong>Cidade</strong>
+          <strong>Estado</strong>
+          <strong>Status</strong>
+          <strong>Ações</strong>
+        </section>
+        {deliveries.map((delivery) => (
+          <DeliveryItem
+            updateDeliveries={loadDeliveries}
+            key={delivery.id}
+            data={delivery}
+          />
+        ))}
+      </Grid>
+      <section>
+        <Button
+          disabled={page === 1}
+          onClick={() => setPage(page - 1)}
+          type="button"
+        >
+          voltar
+        </Button>
+        <Button
+          disabled={deliveries.length < 5}
+          type="button"
+          onClick={() => setPage(page + 1)}
+        >
+          proximo
+        </Button>
+      </section>
     </>
   );
 }

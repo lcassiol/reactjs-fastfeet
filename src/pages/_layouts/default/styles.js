@@ -7,7 +7,6 @@ export const Wrapper = styled.div`
 `;
 
 export const Container = styled.div`
-  background: #fff;
   padding: 34px 120px;
   flex: 1;
 `;
