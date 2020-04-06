@@ -13,7 +13,7 @@ export default function Header() {
             ENCOMENDAS
           </HeaderButton>
           <HeaderButton to="/deliveryman">ENTREGADORES</HeaderButton>
-          <HeaderButton to="/recipient">DESTINATÁRIOS</HeaderButton>
+          <HeaderButton to="/recipients">DESTINATÁRIOS</HeaderButton>
           <HeaderButton to="/delivery-problems">PROBLEMAS</HeaderButton>
         </nav>
 

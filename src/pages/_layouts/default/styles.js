@@ -1,7 +1,13 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
-  height: 100%;
   display: flex;
   background: #f5f5f5;
+  flex-direction: column;
+`;
+
+export const Container = styled.div`
+  background: #fff;
+  padding: 34px 120px;
+  flex: 1;
 `;

@@ -10,7 +10,7 @@ export const Container = styled.div`
 `;
 
 export const Content = styled.div`
-  max-width: 1000px;
+  max-width: 1150px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
