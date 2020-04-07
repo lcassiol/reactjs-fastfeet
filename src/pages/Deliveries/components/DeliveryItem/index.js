@@ -2,6 +2,9 @@ import React from 'react';
 import { MdEdit, MdDeleteForever } from 'react-icons/md';
 import { toast } from 'react-toastify';
 
+import random from 'randomcolor';
+import { complement, lighten } from 'polished';
+
 import PropTypes from 'prop-types';
 
 import More from '~/components/Button/MoreOptions';
@@ -11,9 +14,17 @@ import { statusColors, colors } from '~/styles/colors';
 
 import Modal from '../Modal';
 import Status from '../DeliveryStatus';
-import { Container, MoreConainer } from './styles';
+import { Container, MoreConainer, Initials } from './styles';
 
 export default function DeliveryItem({ data, updateDeliveries }) {
+  const randomColor = random({ luminosity: 'dark' });
+  const backgroundColor = lighten(0.5, complement(randomColor));
+
+  const deliveryManInitials = data.deliveryman.name
+    .split(' ')
+    .map((n) => n[0])
+    .join('');
+
   async function handleDelete() {
     const confirm = window.confirm('Você tem certeza que deseja deletar isso?');
 
@@ -35,7 +46,12 @@ export default function DeliveryItem({ data, updateDeliveries }) {
     <Container>
       <small>#{data.id}</small>
       <small>{data.recipient.name}</small>
-      <small>{`${data.product.substring(0, 16)}...`}</small>
+      <small>
+        <Initials style={{ color: randomColor, background: backgroundColor }}>
+          {deliveryManInitials}
+        </Initials>
+        {data.deliveryman.name}
+      </small>
       <small>{data.recipient.city}</small>
       <small>{data.recipient.state}</small>
       <Status
