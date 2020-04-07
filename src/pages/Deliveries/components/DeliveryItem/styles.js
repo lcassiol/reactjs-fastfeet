@@ -7,7 +7,8 @@ export const Container = styled.div`
   padding-left: 25px;
   padding-right: 13px;
   display: grid;
-  grid-template-columns: 0.5fr 1.5fr 1fr 1.5fr 1.5fr 1fr 1fr;
+
+  grid-template-columns: 0.5fr 1.5fr 1fr 1.5fr 1fr 1fr 1fr;
   > small:last-child {
     text-align: right;
   }

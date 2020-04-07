@@ -9,7 +9,7 @@ export const Grid = styled.div`
     display: grid;
     padding-left: 25px;
     padding-right: 13px;
-    grid-template-columns: 0.5fr 1.5fr 1fr 1.5fr 1.5fr 1fr 1fr;
+    grid-template-columns: 0.5fr 1.5fr 1fr 1.5fr 1fr 1fr 1fr;
     strong:last-child {
       text-align: right;
     }
@@ -24,11 +24,33 @@ export const Grid = styled.div`
   }
 `;
 
+export const PaginationControl = styled.section`
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+
+  button {
+    background: none;
+    border: none;
+
+    svg {
+      color: #000;
+    }
+  }
+
+  button + button {
+    margin-left: 16px;
+  }
+`;
+
 export const Button = styled(DefaultButton)`
-  width: 100px;
+  width: 60px;
   height: 36px;
   &:disabled {
     cursor: not-allowed;
-    background: #666;
+    svg {
+      color: #999;
+    }
   }
 `;

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { MdAdd } from 'react-icons/md';
+import { MdAdd, MdChevronLeft, MdChevronRight } from 'react-icons/md';
 import { useHistory } from 'react-router-dom';
 import { parseISO, format } from 'date-fns';
 
@@ -11,12 +11,13 @@ import IconButton from '~/components/Button/IconButton';
 
 import DeliveryItem from './components/DeliveryItem';
 
-import { Grid, Button } from './styles';
+import { Grid, Button, PaginationControl } from './styles';
 
 export default function Deliveries() {
   const history = useHistory();
 
   const [deliveries, setDeliveries] = useState([]);
+  const [endList, setEndList] = useState(false);
   const [page, setPage] = useState(1);
 
   useEffect(() => {
@@ -43,6 +44,12 @@ export default function Deliveries() {
         page,
       },
     });
+
+    if (response.data.length == 0 && page > 1) {
+      setPage(1);
+      setEndList(true);
+      return;
+    }
 
     const data = formatDates(response.data);
 
@@ -83,22 +90,22 @@ export default function Deliveries() {
           />
         ))}
       </Grid>
-      <section>
+      <PaginationControl>
         <Button
           disabled={page === 1}
           onClick={() => setPage(page - 1)}
           type="button"
         >
-          voltar
+          <MdChevronLeft size={45} />
         </Button>
         <Button
-          disabled={deliveries.length < 5}
+          disabled={endList}
           type="button"
           onClick={() => setPage(page + 1)}
         >
-          proximo
+          <MdChevronRight size={45} />
         </Button>
-      </section>
+      </PaginationControl>
     </>
   );
 }

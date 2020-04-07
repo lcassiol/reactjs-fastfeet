@@ -35,13 +35,13 @@ export default function DeliveryItem({ data, updateDeliveries }) {
     <Container>
       <small>#{data.id}</small>
       <small>{data.recipient.name}</small>
-      <small>{data.product}</small>
+      <small>{`${data.product.substring(0, 16)}...`}</small>
       <small>{data.recipient.city}</small>
       <small>{data.recipient.state}</small>
       <Status
         text={data.status}
-        color={statusColors['PENDENTE'].color}
-        background={statusColors['PENDENTE'].background}
+        color={statusColors[data.status].color}
+        background={statusColors[data.status].background}
       />
       <More>
         <MoreConainer>
