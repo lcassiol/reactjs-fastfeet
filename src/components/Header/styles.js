@@ -1,5 +1,7 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+
+import { colors } from '~/styles/colors';
 
 export const Container = styled.div`
   background: #fff;
@@ -47,12 +49,21 @@ export const Content = styled.div`
   }
 `;
 
-export const HeaderButton = styled(Link)`
+export const HeaderButton = styled(NavLink)`
   font-weight: bold;
   font-size: 12px;
-  color: ${(props) => (props.active ? '#444444' : '#999999')};
+  color: #999999;
+  transition: color 0.3s;
 
   & + a {
     margin-left: 21px;
+  }
+
+  &.active {
+    color: #444444;
+  }
+
+  &:hover {
+    color: #444444;
   }
 `;
