@@ -27,7 +27,7 @@ export const Grid = styled.div`
 export const PaginationControl = styled.section`
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 12px;
   margin-bottom: 20px;
 
   button {
@@ -35,7 +35,7 @@ export const PaginationControl = styled.section`
     border: none;
 
     svg {
-      color: #000;
+      color: #444444;
     }
   }
 

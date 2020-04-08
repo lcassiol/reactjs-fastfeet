@@ -16,7 +16,7 @@ export default function Deliveryman() {
   const history = useHistory();
 
   const [couriers, setCouriers] = useState([]);
-  const [endList, setEndList] = useState(false);
+  const [endList, setEndList] = useState(true);
   const [page, setPage] = useState(1);
 
   useEffect(() => {
