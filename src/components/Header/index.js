@@ -1,9 +1,12 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 import logo from '~/assets/logo.png';
 import { Container, Content, HeaderButton } from './styles';
 
 export default function Header() {
+  const userName = useSelector((state) => state.user.profile.name);
+
   return (
     <Container>
       <Content>
@@ -18,7 +21,7 @@ export default function Header() {
         </nav>
 
         <aside>
-          <strong>Admin fastFeet</strong>
+          <strong>{userName}</strong>
           <a href="#">sair do sistema</a>
         </aside>
       </Content>
