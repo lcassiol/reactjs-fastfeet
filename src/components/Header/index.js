@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import logo from '~/assets/logo.png';
 import { Container, Content, HeaderButton } from './styles';
@@ -11,7 +12,9 @@ export default function Header() {
     <Container>
       <Content>
         <nav>
-          <img src={logo} alt="FastFeet" />
+          <Link to="deliveries">
+            <img src={logo} alt="FastFeet" />
+          </Link>
           <HeaderButton to="/deliveries" active={true ? 1 : 0}>
             ENCOMENDAS
           </HeaderButton>
