@@ -12,7 +12,6 @@ import api from '~/services/api';
 import history from '~/services/history';
 import { colors } from '~/styles/colors';
 
-import Modal from '../Modal';
 import { Container, MoreConainer, Initials } from './styles';
 
 export default function DeliveryManItem({ data, updateDeliveries }) {
