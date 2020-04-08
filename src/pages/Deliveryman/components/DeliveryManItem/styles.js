@@ -8,7 +8,7 @@ export const Container = styled.div`
   padding-right: 13px;
   display: grid;
 
-  grid-template-columns: 0.5fr 1.5fr 1fr 1.5fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1.5fr 1.5fr 1.5fr 1fr;
   > small:last-child {
     text-align: right;
   }
@@ -17,20 +17,11 @@ export const Container = styled.div`
     color: #666;
     text-align: left;
     margin: auto 0;
-  }
-
-  small {
-    display: flex;
 
     img {
       height: 35px;
       width: 35px;
       border-radius: 50%;
-    }
-
-    small {
-      margin-top: 10px;
-      margin-left: 6px;
     }
   }
 
@@ -59,7 +50,7 @@ export const MoreConainer = styled.div`
       font-size: 16px;
       color: #999;
     }
-    :nth-last-child(-n + 2) {
+    :nth-last-child(-n + 1) {
       padding-top: 6px;
       border-top: 1px solid #eee;
     }
@@ -73,6 +64,5 @@ export const Initials = styled.span`
   padding: 6px;
   margin-right: 5px;
   font-size: 16px;
-
-  border-radius: 60%;
+  border-radius: 50%;
 `;

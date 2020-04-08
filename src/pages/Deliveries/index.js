@@ -45,10 +45,12 @@ export default function Deliveries() {
       },
     });
 
-    if (response.data.length == 0 && page > 1) {
-      setPage(1);
+    if (page >= 1 && response.data.length < 5) {
       setEndList(true);
-      return;
+    }
+
+    if (page == 1 && response.data.length == 5) {
+      setEndList(false);
     }
 
     const data = formatDates(response.data);
@@ -67,7 +69,7 @@ export default function Deliveries() {
         <IconButton
           Icon={MdAdd}
           title="CADASTRAR"
-          action={() => history.push('/deliveryman/new')}
+          action={() => history.push('/delivery/new')}
           type="button"
         />
       </Top>
