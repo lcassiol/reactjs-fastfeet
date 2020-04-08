@@ -45,7 +45,7 @@ export default function DeliveryManItem({ data, updateDeliveries }) {
       <small>#{data.id}</small>
       <small>
         {data.avatar ? (
-          <img src={data.avatar.url} alt="delivery man image" />
+          <img src={data.avatar.url} alt="delivery man" />
         ) : (
           <Initials style={{ color: randomColor, background: backgroundColor }}>
             {deliveryManInitials}

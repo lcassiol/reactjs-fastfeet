@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 
-import { colors } from '~/styles/colors';
-
 export const Container = styled.div`
   background: #fff;
   padding: 20px 30px;

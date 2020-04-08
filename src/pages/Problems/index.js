@@ -18,7 +18,7 @@ export default function Problems() {
 
   useEffect(() => {
     loadProblems();
-  }, [page]);
+  }, [page]); //eslint-disable-line
 
   function handleSearch() {}
 

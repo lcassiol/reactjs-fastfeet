@@ -9,7 +9,7 @@ import api from '~/services/api';
 import history from '~/services/history';
 import { colors } from '~/styles/colors';
 
-import { Container, MoreConainer, Initials } from './styles';
+import { Container, MoreContainer } from './styles';
 
 export default function RecipientItem({ data, updateDeliveries }) {
   async function handleDelete() {
@@ -37,7 +37,7 @@ export default function RecipientItem({ data, updateDeliveries }) {
         {data.street}, {data.number}, {data.city} - {data.state}
       </small>
       <More>
-        <MoreConainer>
+        <MoreContainer>
           <div>
             <button
               onClick={() => history.push(`/deliveryman/form/${data.id}`)}
@@ -53,7 +53,7 @@ export default function RecipientItem({ data, updateDeliveries }) {
               <span>Excluir</span>
             </button>
           </div>
-        </MoreConainer>
+        </MoreContainer>
       </More>
     </Container>
   );

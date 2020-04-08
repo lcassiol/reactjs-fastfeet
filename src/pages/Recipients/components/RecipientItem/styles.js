@@ -32,7 +32,7 @@ export const Container = styled.div`
   }
 `;
 
-export const MoreConainer = styled.div`
+export const MoreContainer = styled.div`
   padding: 10px;
   > div {
     display: flex;
@@ -58,11 +58,4 @@ export const MoreConainer = styled.div`
       padding-bottom: 0;
     }
   }
-`;
-
-export const Initials = styled.span`
-  padding: 6px;
-  margin-right: 5px;
-  font-size: 16px;
-  border-radius: 50%;
 `;

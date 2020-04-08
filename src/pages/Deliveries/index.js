@@ -22,7 +22,7 @@ export default function Deliveries() {
 
   useEffect(() => {
     loadDeliveries();
-  }, [page]);
+  }, [page]); //eslint-disable-line
 
   function formatDates(data) {
     return data.map((delivery) => ({
@@ -49,7 +49,7 @@ export default function Deliveries() {
       setEndList(true);
     }
 
-    if (page == 1 && response.data.length == 5) {
+    if (page === 1 && response.data.length === 5) {
       setEndList(false);
     }
 

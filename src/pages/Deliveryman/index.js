@@ -21,7 +21,7 @@ export default function Deliveryman() {
 
   useEffect(() => {
     loadCouriers();
-  }, [page]);
+  }, [page]); //eslint-disable-line
 
   function handleSearch() {}
 
@@ -36,7 +36,7 @@ export default function Deliveryman() {
       setEndList(true);
     }
 
-    if (page == 1 && response.data.length == 5) {
+    if (page === 1 && response.data.length === 5) {
       setEndList(false);
     }
 

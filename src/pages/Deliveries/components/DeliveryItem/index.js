@@ -29,16 +29,15 @@ export default function DeliveryItem({ data, updateDeliveries }) {
     const confirm = window.confirm('Você tem certeza que deseja deletar isso?');
 
     if (!confirm) {
-      toast.error('Encomenda não apagada!');
       return;
     }
 
     try {
-      await api.delete(`/deliveries/${data.id}`);
+      await api.delete(`/delivery/${data.id}`);
       updateDeliveries();
       toast.success('Encomenda apagada com sucesso!');
     } catch (err) {
-      toast.error('Essa encomenda não pode ser deletada!');
+      toast.error('A encomenda não pode ser deletada!');
     }
   }
 
@@ -94,11 +93,12 @@ DeliveryItem.propTypes = {
   data: PropTypes.shape({
     id: PropTypes.number,
     product: PropTypes.string,
+    status: PropTypes.string,
     recipient: PropTypes.shape({
+      id: PropTypes.number,
       name: PropTypes.string,
       city: PropTypes.string,
       state: PropTypes.string,
     }),
-    status: PropTypes.string,
   }).isRequired,
 };
