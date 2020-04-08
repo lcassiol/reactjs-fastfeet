@@ -14,7 +14,7 @@ import { statusColors, colors } from '~/styles/colors';
 
 import Modal from '../Modal';
 import Status from '../DeliveryStatus';
-import { Container, MoreConainer, Initials } from './styles';
+import { Container, MoreContainer, Initials } from './styles';
 
 export default function DeliveryItem({ data, updateDeliveries }) {
   const randomColor = random({ luminosity: 'dark' });
@@ -64,7 +64,7 @@ export default function DeliveryItem({ data, updateDeliveries }) {
         background={statusColors[data.status].background}
       />
       <More>
-        <MoreConainer>
+        <MoreContainer>
           <div>
             <Modal data={data} />
           </div>
@@ -83,7 +83,7 @@ export default function DeliveryItem({ data, updateDeliveries }) {
               <span>Excluir</span>
             </button>
           </div>
-        </MoreConainer>
+        </MoreContainer>
       </More>
     </Container>
   );

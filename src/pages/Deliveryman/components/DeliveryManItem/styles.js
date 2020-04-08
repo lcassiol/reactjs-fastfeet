@@ -32,7 +32,7 @@ export const Container = styled.div`
   }
 `;
 
-export const MoreConainer = styled.div`
+export const MoreContainer = styled.div`
   padding: 10px;
   > div {
     display: flex;
