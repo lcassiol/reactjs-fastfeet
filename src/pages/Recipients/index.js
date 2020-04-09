@@ -23,12 +23,21 @@ export default function Recipients() {
     loadRecipients();
   }, [page]); //eslint-disable-line
 
-  function handleSearch() {}
+  function handleSearch(e) {
+    if (e.target.value.length > 3) {
+      setPage(1);
+      loadRecipients(e.target.value);
+    } else if (e.target.value.length === 0) {
+      setPage(1);
+      loadRecipients('');
+    }
+  }
 
-  async function loadRecipients() {
+  async function loadRecipients(searchText) {
     const response = await api.get('/recipients', {
       params: {
         page,
+        q: searchText,
       },
     });
 

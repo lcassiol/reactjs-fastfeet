@@ -23,12 +23,21 @@ export default function Deliveryman() {
     loadCouriers();
   }, [page]); //eslint-disable-line
 
-  function handleSearch() {}
+  function handleSearch(e) {
+    if (e.target.value.length > 3) {
+      setPage(1);
+      loadCouriers(e.target.value);
+    } else if (e.target.value.length === 0) {
+      setPage(1);
+      loadCouriers('');
+    }
+  }
 
-  async function loadCouriers() {
+  async function loadCouriers(searchText) {
     const response = await api.get('/deliveryman', {
       params: {
         page,
+        q: searchText,
       },
     });
 

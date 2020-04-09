@@ -46,11 +46,11 @@ export default function Deliveries() {
     }
   }
 
-  async function loadDeliveries(search) {
+  async function loadDeliveries(searchText) {
     const response = await api.get('/delivery', {
       params: {
         page,
-        q: search,
+        q: searchText,
       },
     });
 
