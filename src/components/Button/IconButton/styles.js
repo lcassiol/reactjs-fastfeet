@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { colors } from '~/styles/colors';
 
 export default styled.button`
-  padding: 0 16px;
+  padding: 0 12px;
   height: 36px;
   font-size: 14px;
   font-weight: bold;
@@ -15,6 +15,6 @@ export default styled.button`
   text-align: center;
   align-items: center;
   svg {
-    margin-right: 7px;
+    margin-right: 4px;
   }
 `;

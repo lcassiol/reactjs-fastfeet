@@ -9,11 +9,12 @@ export default function IconButton({
   Icon,
   action,
   background,
+  iconSize,
   ...rest
 }) {
   return (
     <Button onClick={action} background={background} {...rest}>
-      <Icon color="#fff" size={16} />
+      <Icon color="#fff" size={iconSize || 16} />
       {title}
     </Button>
   );

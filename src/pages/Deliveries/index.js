@@ -77,8 +77,9 @@ export default function Deliveries() {
         />
         <IconButton
           Icon={MdAdd}
+          iconSize={25}
           title="CADASTRAR"
-          action={() => history.push('/delivery/new')}
+          action={() => history.push('/deliveries/new')}
           type="button"
         />
       </Top>
