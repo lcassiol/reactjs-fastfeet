@@ -36,12 +36,21 @@ export default function Deliveries() {
     }));
   }
 
-  function handleSearch() {}
+  function handleSearch(e) {
+    if (e.target.value.length > 3) {
+      setPage(1);
+      loadDeliveries(e.target.value);
+    } else if (e.target.value.length === 0) {
+      setPage(1);
+      loadDeliveries('');
+    }
+  }
 
-  async function loadDeliveries() {
+  async function loadDeliveries(search) {
     const response = await api.get('/delivery', {
       params: {
         page,
+        q: search,
       },
     });
 
