@@ -39,10 +39,12 @@ export const Content = styled.div`
       margin-top: -5px;
     }
 
-    a {
+    button {
       color: #de3b3b;
       font-size: 12px;
       margin-top: 5px;
+      border: none;
+      background: #fff;
     }
   }
 `;
