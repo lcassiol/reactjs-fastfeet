@@ -9,6 +9,10 @@ export default function AvatarInput({ name, onChangeAvatar, ...rest }) {
   const [preview, setPreview] = useState('');
 
   const handlePreview = async (e) => {
+    if (!e.target.files) {
+      return;
+    }
+
     const file = e.target.files[0];
 
     const data = new FormData();

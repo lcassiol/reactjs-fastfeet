@@ -24,6 +24,8 @@ export const Content = styled.label`
   border-radius: 50%;
   > img {
     border-radius: 50%;
+    height: 149px;
+    width: 156px;
   }
   > input {
     display: none;

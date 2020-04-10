@@ -19,7 +19,6 @@ import { Container, Content, Form } from './styles';
 const schema = Yup.object().shape({
   name: Yup.string().required('O nome do entregador é obrigatório'),
   email: Yup.string().required('O email do entregador é obrigatório'),
-  avatar: Yup.number(),
 });
 
 export default function NewOrEditDeliveryMan({ match }) {
@@ -27,7 +26,7 @@ export default function NewOrEditDeliveryMan({ match }) {
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [avatar, setAvatar] = useState('');
+  const [avatar, setAvatar] = useState(null);
   const [formErrors, setFormErrors] = useState([]);
 
   useEffect(() => {
@@ -103,6 +102,7 @@ export default function NewOrEditDeliveryMan({ match }) {
           <Input
             label="Nome"
             name="name"
+            error={formErrors['name']}
             value={name}
             onChange={(e) => {
               setName(e.target.value);
@@ -113,6 +113,7 @@ export default function NewOrEditDeliveryMan({ match }) {
           <Input
             label="Email"
             name="email"
+            error={formErrors['email']}
             value={email}
             onChange={(e) => {
               setEmail(e.target.value);
