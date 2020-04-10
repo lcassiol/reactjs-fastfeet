@@ -69,7 +69,7 @@ export default function DeliveryItem({ data, updateDeliveries }) {
           </div>
           <div>
             <button
-              onClick={() => history.push(`/deliveries/form/${data.id}`)}
+              onClick={() => history.push(`/deliveries/edit/${data.id}`)}
               type="button"
             >
               <MdEdit color={colors.info} size={15} />

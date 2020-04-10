@@ -47,13 +47,23 @@ export default function NewOrEditDelivery({ match }) {
 
   useEffect(() => {
     async function loadInitialData(deliveryId) {
-      if (id) {
-        const response = await api.get(`/deliveries/${deliveryId}`);
+      const { data: response } = await api.get(`/delivery/${deliveryId}`);
 
-        //setar os campos recipient deliveryman e product
-      }
+      console.log(response);
+      setProduct(response.product);
+      setRecipient({
+        value: response.recipient.id,
+        label: response.recipient.name,
+      });
+      setDeliveryMan({
+        value: response.deliveryman.id,
+        label: response.deliveryman.name,
+      });
+      //setar os campos recipient deliveryman e product
     }
-    loadInitialData(id);
+    if (id) {
+      loadInitialData(id);
+    }
   }, [id]);
 
   async function loadRecipientOptions(inputValue) {
@@ -178,6 +188,7 @@ export default function NewOrEditDelivery({ match }) {
           <Input
             label="Nome do produto"
             name="product"
+            value={product}
             onChange={(e) => {
               setProduct(e.target.value);
             }}
