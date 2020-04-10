@@ -35,9 +35,9 @@ export default function DeliveryManItem({ data, loadCouriers }) {
     try {
       await api.delete(`/deliveryman/${data.id}`);
       loadCouriers();
-      toast.success('Encomenda apagada com sucesso!');
+      toast.success('Entregador removido com sucesso!');
     } catch (err) {
-      toast.error('Essa encomenda não pode ser deletada!');
+      toast.error('Entregador não pode ser removido! Verifique os logs');
     }
   }
 

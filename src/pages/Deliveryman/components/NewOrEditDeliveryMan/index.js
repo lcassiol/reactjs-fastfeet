@@ -27,13 +27,21 @@ export default function NewOrEditDeliveryMan({ match }) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [avatar, setAvatar] = useState(null);
+  const [avatarUrl, setAvatarUrl] = useState('');
   const [formErrors, setFormErrors] = useState([]);
 
   useEffect(() => {
     async function loadInitialData(deliveryId) {
       const { data: response } = await api.get(`/deliveryman/${deliveryId}`);
+      const { name, email, avatar } = response;
+      setName(name);
+      setEmail(email);
 
-      console.log(response);
+      if (avatar) {
+        console.log(avatar.url);
+        setAvatar(avatar.id);
+        setAvatarUrl(avatar.url);
+      }
     }
     if (id) {
       loadInitialData(id);
@@ -44,7 +52,6 @@ export default function NewOrEditDeliveryMan({ match }) {
     const data = {
       name,
       email,
-      avatar,
     };
 
     try {
@@ -54,20 +61,16 @@ export default function NewOrEditDeliveryMan({ match }) {
 
       setFormErrors([]);
 
+      if (avatar) {
+        data.avatar_id = avatar;
+      }
+
       if (id) {
-        await api.put(`/deliveryman/${id}`, {
-          name: data.name,
-          email: data.email,
-          avatar_id: data.avatar,
-        });
+        await api.put(`/deliveryman/${id}`, data);
         history.push('/deliveryman');
         toast.success('Entregador editado com sucesso!');
       } else {
-        await api.post('/deliveryman', {
-          name: data.name,
-          email: data.email,
-          avatar_id: data.avatar,
-        });
+        await api.post('/deliveryman', data);
         history.push('/deliveryman');
         toast.success('Entregador criado com sucesso!');
       }
@@ -98,6 +101,7 @@ export default function NewOrEditDeliveryMan({ match }) {
               setAvatar(imageId);
             }}
             name="avatar"
+            imageUrl={avatarUrl}
           />
           <Input
             label="Nome"

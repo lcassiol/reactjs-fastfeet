@@ -1,12 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { MdInsertPhoto } from 'react-icons/md';
 import PropTypes from 'prop-types';
 
 import { Container, Content } from './styles';
 import api from '~/services/api';
 
-export default function AvatarInput({ name, onChangeAvatar, ...rest }) {
+export default function AvatarInput({
+  name,
+  onChangeAvatar,
+  imageUrl,
+  ...rest
+}) {
   const [preview, setPreview] = useState('');
+
+  useEffect(() => {
+    setPreview(imageUrl);
+  }, [imageUrl]);
 
   const handlePreview = async (e) => {
     if (!e.target.files) {
