@@ -155,7 +155,7 @@ export default function NewOrEditDelivery({ match }) {
     <Container>
       <Content>
         <Header title="Cadastro de encomendas">
-          <BackButton iconSize={25} />
+          <BackButton iconSize={25} path="/deliveries" />
           <SaveButton action={handleSubmit} iconSize={25} />
         </Header>
         <Form>

@@ -5,12 +5,12 @@ import history from '~/services/history';
 
 import IconButton from '../IconButton';
 
-export default function BackButton({ iconSize }) {
+export default function BackButton({ iconSize, path }) {
   return (
     <IconButton
       title="VOLTAR"
       Icon={MdKeyboardArrowLeft}
-      action={history.goBack}
+      action={() => history.push(path)}
       background="#CCCCCC"
       iconSize={iconSize}
     />
