@@ -8,6 +8,8 @@ import Deliveries from '~/pages/Deliveries';
 import NewOrEditDelivery from '~/pages/Deliveries/components/NewOrEditDelivery';
 
 import Deliveryman from '~/pages/Deliveryman';
+import NewOrEditDeliveryMan from '~/pages/Deliveryman/components/NewOrEditDeliveryMan';
+
 import Recipients from '~/pages/Recipients';
 import Problems from '~/pages/Problems';
 
@@ -30,7 +32,20 @@ export default function Routes() {
         isPrivate
       />
 
-      <Route path="/deliveryman" component={Deliveryman} isPrivate />
+      <Route path="/deliveryman" exact component={Deliveryman} isPrivate />
+      <Route
+        path="/deliveryman/new"
+        exact
+        component={NewOrEditDeliveryMan}
+        isPrivate
+      />
+      <Route
+        path="/deliveryman/edit/:id"
+        exact
+        component={NewOrEditDeliveryMan}
+        isPrivate
+      />
+
       <Route path="/recipients" component={Recipients} isPrivate />
       <Route path="/delivery-problems" component={Problems} isPrivate />
     </Switch>
