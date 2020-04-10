@@ -14,7 +14,7 @@ import { colors } from '~/styles/colors';
 
 import { Container, MoreContainer, Initials } from './styles';
 
-export default function DeliveryManItem({ data, updateDeliveries }) {
+export default function DeliveryManItem({ data, loadCouriers }) {
   const randomColor = random({ luminosity: 'dark' });
   const backgroundColor = lighten(0.5, complement(randomColor));
 
@@ -24,16 +24,17 @@ export default function DeliveryManItem({ data, updateDeliveries }) {
     .join('');
 
   async function handleDelete() {
-    const confirm = window.confirm('Você tem certeza que deseja deletar isso?');
+    const confirm = window.confirm(
+      'Você tem certeza que deseja remover este entregador?'
+    );
 
     if (!confirm) {
-      toast.error('Encomenda não apagada!');
       return;
     }
 
     try {
-      await api.delete(`/deliveries/${data.id}`);
-      updateDeliveries();
+      await api.delete(`/deliveryman/${data.id}`);
+      loadCouriers();
       toast.success('Encomenda apagada com sucesso!');
     } catch (err) {
       toast.error('Essa encomenda não pode ser deletada!');
@@ -58,7 +59,7 @@ export default function DeliveryManItem({ data, updateDeliveries }) {
         <MoreContainer>
           <div>
             <button
-              onClick={() => history.push(`/deliveryman/form/${data.id}`)}
+              onClick={() => history.push(`/deliveryman/edit/${data.id}`)}
               type="button"
             >
               <MdEdit color={colors.info} size={15} />
@@ -78,7 +79,7 @@ export default function DeliveryManItem({ data, updateDeliveries }) {
 }
 
 DeliveryManItem.propTypes = {
-  updateDeliveries: PropTypes.func.isRequired,
+  loadCouriers: PropTypes.func.isRequired,
   data: PropTypes.shape({
     id: PropTypes.number,
     name: PropTypes.string,

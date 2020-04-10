@@ -78,7 +78,7 @@ export default function Deliveryman() {
         </section>
         {couriers.map((courier) => (
           <DeliveryManItem
-            updateDeliveryman={loadCouriers}
+            loadCouriers={loadCouriers}
             key={courier.id}
             data={courier}
           />
