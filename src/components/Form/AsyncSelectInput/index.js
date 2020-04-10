@@ -6,9 +6,9 @@ import PropTypes from 'prop-types';
 
 import { Container, Label, Error } from './styles';
 
-export default function AsyncSelectInput({ name, label, ...rest }) {
+export default function AsyncSelectInput({ name, label, error, ...rest }) {
   const selectRef = useRef(null);
-  const { fieldName, defaultValue, registerField, error } = useField(name);
+  const { fieldName, defaultValue, registerField } = useField(name);
 
   useEffect(() => {
     registerField({
@@ -41,6 +41,7 @@ export default function AsyncSelectInput({ name, label, ...rest }) {
       {label && <Label htmlFor={fieldName}>{label}</Label>}
       <Select
         cacheOptions
+        defaultOptions
         defaultValue={defaultValue}
         ref={selectRef}
         classNamePrefix="react-select"

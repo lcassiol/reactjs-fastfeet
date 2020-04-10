@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { toast } from 'react-toastify';
 
 import PropTypes from 'prop-types';
@@ -12,39 +12,51 @@ import Header from '~/components/Form/Header';
 import api from '~/services/api';
 import history from '~/services/history';
 
-import { Container, Content, UnForm } from './styles';
+import { Container, Content, Form } from './styles';
+
+const schema = Yup.object().shape({
+  product: Yup.string().required('O nome do produto é obrigatório'),
+  recipient: Yup.object()
+    .shape({
+      value: Yup.number(),
+      label: Yup.string(),
+    })
+    .required('O destinatário é obrigatório'),
+  deliveryMan: Yup.object()
+    .shape({
+      value: Yup.number(),
+      label: Yup.string(),
+    })
+    .required('O entregador é obrigatório'),
+});
+
+const customStylesSelectInput = {
+  control: (provided) => ({
+    ...provided,
+    height: 45,
+  }),
+};
 
 export default function NewOrEditDelivery({ match }) {
   const { id } = match.params;
-  const formRef = useRef(null);
+
+  const [product, setProduct] = useState('');
+  const [recipient, setRecipient] = useState('');
+  const [deliveryMan, setDeliveryMan] = useState('');
+  const [formErrors, setFormErrors] = useState([]);
 
   useEffect(() => {
     async function loadInitialData(deliveryId) {
       if (id) {
         const response = await api.get(`/deliveries/${deliveryId}`);
 
-        formRef.current.setData(response.data);
-        formRef.current.setFieldValue('recipient_id', {
-          value: response.data.recipient.id,
-          label: response.data.recipient.name,
-        });
-        formRef.current.setFieldValue('deliveryman_id', {
-          value: response.data.deliveryman.id,
-          label: response.data.deliveryman.name,
-        });
+        //setar os campos recipient deliveryman e product
       }
     }
     loadInitialData(id);
   }, [id]);
 
-  const customStylesSelectInput = {
-    control: (provided) => ({
-      ...provided,
-      height: 45,
-    }),
-  };
-
-  async function loadRecipientOptions(inputValue, callback) {
+  async function loadRecipientOptions(inputValue) {
     const response = await api.get('/recipients', {
       params: {
         q: inputValue,
@@ -56,10 +68,10 @@ export default function NewOrEditDelivery({ match }) {
       label: recipient.name,
     }));
 
-    callback(data);
+    return data;
   }
 
-  async function loadDeliverymenSelect(inputValue, callback) {
+  async function loadDeliverymenSelect(inputValue) {
     const response = await api.get('/deliveryman', {
       params: {
         q: inputValue,
@@ -71,51 +83,62 @@ export default function NewOrEditDelivery({ match }) {
       label: deliveryman.name,
     }));
 
-    callback(data);
+    return data;
   }
 
-  async function handleSubmit(data, { reset }) {
-    formRef.current.setErrors({});
-    try {
-      const schema = Yup.object().shape({
-        product: Yup.string().required('O nome do produto é obrigatório'),
-        recipient_id: Yup.string().required('O destinatário é obrigatório'),
-        deliveryman_id: Yup.string().required('O entregador é obrigatório'),
-      });
+  async function handleSubmit() {
+    const data = {
+      product,
+      deliveryMan,
+      recipient,
+    };
 
+    console.log(data);
+
+    try {
       await schema.validate(data, {
         abortEarly: false,
       });
 
+      setFormErrors([]);
+
       if (id) {
-        await api.put(`/deliveries/${id}`, {
+        await api.put(`/delivery/${id}`, {
           product: data.product,
-          recipient_id: data.recipient_id,
-          deliveryman_id: data.deliveryman_id,
+          recipient_id: data.recipient.value,
+          deliveryman_id: data.deliveryMan.value,
         });
         history.push('/deliveries');
         toast.success('Encomenda editada com sucesso!');
       } else {
-        await api.post('/deliveries', {
+        await api.post('/delivery', {
           product: data.product,
-          recipient_id: data.recipient_id,
-          deliveryman_id: data.deliveryman_id,
+          recipient_id: data.recipient.value,
+          deliveryman_id: data.deliveryMan.value,
         });
+        history.push('/deliveries');
         toast.success('Encomenda criada com sucesso!');
       }
-
-      reset();
     } catch (err) {
+      console.log(err);
       if (err instanceof Yup.ValidationError) {
-        const errorMessages = {};
+        const errorMessages = [];
 
         err.inner.forEach((error) => {
           errorMessages[error.path] = error.message;
         });
 
-        formRef.current.setErrors(errorMessages);
+        setFormErrors(errorMessages);
       }
     }
+  }
+
+  function onChangeRecipient(selectedValue) {
+    setRecipient(selectedValue);
+  }
+
+  function onChangeDeliveryMan(selectedValue) {
+    setDeliveryMan(selectedValue);
   }
 
   return (
@@ -123,18 +146,17 @@ export default function NewOrEditDelivery({ match }) {
       <Content>
         <Header title="Cadastro de encomendas">
           <BackButton iconSize={25} />
-          <SaveButton
-            iconSize={25}
-            action={() => formRef.current.submitForm()}
-          />
+          <SaveButton action={handleSubmit} iconSize={25} />
         </Header>
-
-        <UnForm ref={formRef} onSubmit={handleSubmit}>
+        <Form>
           <section>
             <AsyncSelectInput
               type="text"
+              error={formErrors['recipient']}
               label="Destinatário"
-              name="recipient_id"
+              name="recipient"
+              onChange={onChangeRecipient}
+              value={recipient}
               placeholder="Destinatários"
               noOptionsMessage={() => 'Nenhum destinatário encontrado'}
               loadOptions={loadRecipientOptions}
@@ -142,8 +164,11 @@ export default function NewOrEditDelivery({ match }) {
             />
             <AsyncSelectInput
               type="text"
+              error={formErrors['deliveryMan']}
               label="Entregador"
-              name="deliveryman_id"
+              name="deliveryman"
+              onChange={onChangeDeliveryMan}
+              value={deliveryMan}
               placeholder="Entregadores"
               noOptionsMessage={() => 'Nenhum entregador encontrado'}
               loadOptions={loadDeliverymenSelect}
@@ -153,13 +178,15 @@ export default function NewOrEditDelivery({ match }) {
           <Input
             label="Nome do produto"
             name="product"
+            onChange={(e) => {
+              setProduct(e.target.value);
+            }}
+            error={formErrors['product']}
             type="text"
             placeholder="Nome do produto"
-            onKeyPress={(e) =>
-              e.key === 'Enter' ? formRef.current.submitForm() : null
-            }
+            onKeyPress={(e) => {}}
           />
-        </UnForm>
+        </Form>
       </Content>
     </Container>
   );

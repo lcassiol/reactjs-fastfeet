@@ -5,9 +5,9 @@ import PropTypes from 'prop-types';
 
 import { UnInput, Error, Label } from './styles';
 
-export default function Input({ name, label, ...rest }) {
+export default function Input({ name, label, error, ...rest }) {
   const inputRef = useRef(null);
-  const { fieldName, defaultValue = '', registerField, error } = useField(name);
+  const { fieldName, defaultValue = '', registerField } = useField(name);
 
   useEffect(() => {
     registerField({
