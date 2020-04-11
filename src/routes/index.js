@@ -11,6 +11,8 @@ import Deliveryman from '~/pages/Deliveryman';
 import NewOrEditDeliveryMan from '~/pages/Deliveryman/components/NewOrEditDeliveryMan';
 
 import Recipients from '~/pages/Recipients';
+import NewOrEditRecipient from '~/pages/Recipients/components/NewOrEditRecipient';
+
 import Problems from '~/pages/Problems';
 
 export default function Routes() {
@@ -46,7 +48,20 @@ export default function Routes() {
         isPrivate
       />
 
-      <Route path="/recipients" component={Recipients} isPrivate />
+      <Route path="/recipients" exact component={Recipients} isPrivate />
+      <Route
+        path="/recipients/new"
+        exact
+        component={NewOrEditRecipient}
+        isPrivate
+      />
+      <Route
+        path="/recipients/edit/:id"
+        exact
+        component={NewOrEditRecipient}
+        isPrivate
+      />
+
       <Route path="/delivery-problems" component={Problems} isPrivate />
     </Switch>
   );

@@ -63,7 +63,7 @@ export default function Recipients() {
         <IconButton
           Icon={MdAdd}
           title="CADASTRAR"
-          action={() => history.push('/deliveryman/new')}
+          action={() => history.push('/recipients/new')}
           type="button"
         />
       </Top>
@@ -77,7 +77,7 @@ export default function Recipients() {
         </section>
         {recipients.map((recipient) => (
           <RecipientItem
-            updateRecipient={loadRecipients}
+            loadRecipients={loadRecipients}
             key={recipient.id}
             data={recipient}
           />

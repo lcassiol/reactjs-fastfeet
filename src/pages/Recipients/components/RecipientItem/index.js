@@ -11,21 +11,20 @@ import { colors } from '~/styles/colors';
 
 import { Container, MoreContainer } from './styles';
 
-export default function RecipientItem({ data, updateDeliveries }) {
+export default function RecipientItem({ data, loadRecipients }) {
   async function handleDelete() {
-    const confirm = window.confirm('Você tem certeza que deseja deletar isso?');
+    const confirm = window.confirm('Você tem certeza que deseja remover?');
 
     if (!confirm) {
-      toast.error('Encomenda não apagada!');
       return;
     }
 
     try {
-      await api.delete(`/deliveries/${data.id}`);
-      updateDeliveries();
-      toast.success('Encomenda apagada com sucesso!');
+      await api.delete(`/recipients/${data.id}`);
+      toast.success('Destinatário apagado com sucesso!');
+      loadRecipients('');
     } catch (err) {
-      toast.error('Essa encomenda não pode ser deletada!');
+      toast.error('Destinatário não pode ser removido! Veja os logs');
     }
   }
 
@@ -40,7 +39,7 @@ export default function RecipientItem({ data, updateDeliveries }) {
         <MoreContainer>
           <div>
             <button
-              onClick={() => history.push(`/deliveryman/form/${data.id}`)}
+              onClick={() => history.push(`/recipients/edit/${data.id}`)}
               type="button"
             >
               <MdEdit color={colors.info} size={15} />
