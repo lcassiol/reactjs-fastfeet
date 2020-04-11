@@ -54,7 +54,7 @@ DeliveryModal.propTypes = {
       number: PropTypes.number,
       city: PropTypes.string,
       state: PropTypes.string,
-      zip_code: PropTypes.string,
+      postal_code: PropTypes.string,
     }),
     status: PropTypes.string,
     signature: PropTypes.shape({

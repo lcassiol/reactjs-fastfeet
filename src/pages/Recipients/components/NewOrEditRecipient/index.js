@@ -99,7 +99,6 @@ export default function NewOrEditRecipient({ match }) {
         toast.success('Destinatário criado com sucesso!');
       }
     } catch (err) {
-      console.log(err);
       if (err instanceof Yup.ValidationError) {
         const errorMessages = [];
 

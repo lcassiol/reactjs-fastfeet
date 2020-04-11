@@ -49,7 +49,6 @@ export default function NewOrEditDelivery({ match }) {
     async function loadInitialData(deliveryId) {
       const { data: response } = await api.get(`/delivery/${deliveryId}`);
 
-      console.log(response);
       setProduct(response.product);
       setRecipient({
         value: response.recipient.id,
@@ -103,8 +102,6 @@ export default function NewOrEditDelivery({ match }) {
       recipient,
     };
 
-    console.log(data);
-
     try {
       await schema.validate(data, {
         abortEarly: false,
@@ -130,7 +127,6 @@ export default function NewOrEditDelivery({ match }) {
         toast.success('Encomenda criada com sucesso!');
       }
     } catch (err) {
-      console.log(err);
       if (err instanceof Yup.ValidationError) {
         const errorMessages = [];
 

@@ -1,17 +1,21 @@
 import React from 'react';
-import { MdEdit, MdDeleteForever } from 'react-icons/md';
+import { MdDeleteForever } from 'react-icons/md';
 import { toast } from 'react-toastify';
 
 import PropTypes from 'prop-types';
 
 import More from '~/components/Button/MoreOptions';
+import Modal from '../Modal';
 import api from '~/services/api';
-import history from '~/services/history';
+
 import { colors } from '~/styles/colors';
 
 import { Container, MoreContainer } from './styles';
 
 export default function ProblemsItem({ data, loadProblems }) {
+  let description = data.description.substring(0, 80);
+  description += data.description.length > 80 ? '...' : '';
+
   async function handleDelete() {
     const confirm = window.confirm(
       'Você tem certeza que deseja cancelar esta entrega?'
@@ -33,17 +37,11 @@ export default function ProblemsItem({ data, loadProblems }) {
   return (
     <Container>
       <small>#{data.delivery.id}</small>
-      <small>{data.description}</small>
-      <More>
+      <small>{description}</small>
+      <More dialogWidth={'208px'}>
         <MoreContainer>
           <div>
-            <button
-              onClick={() => history.push(`/deliveryman/form/${data.id}`)}
-              type="button"
-            >
-              <MdEdit color={colors.info} size={15} />
-              <span>Visualizar</span>
-            </button>
+            <Modal data={data} />
           </div>
           <div>
             <button onClick={handleDelete} type="button">

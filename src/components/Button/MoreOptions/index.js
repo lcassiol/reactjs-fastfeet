@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 
 import { PopUpButton } from './styles';
 
-export default function MoreOptionsPopUp({ children, ...rest }) {
+export default function MoreOptionsPopUp({ children, dialogWidth, ...rest }) {
   return (
     <Popup
       trigger={
@@ -16,7 +16,7 @@ export default function MoreOptionsPopUp({ children, ...rest }) {
       }
       position="bottom center"
       contentStyle={{
-        width: '150px',
+        width: dialogWidth || '150px',
         borderRadius: '4px',
       }}
       {...rest}

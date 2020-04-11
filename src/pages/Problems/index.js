@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
-import { useHistory } from 'react-router-dom';
 
 import api from '~/services/api';
 
+import Top from '~/components/Top';
 import ProblemItem from './components/ProblemsItem';
 
 import { Grid, Button, PaginationControl } from './styles';
@@ -47,6 +47,7 @@ export default function Problems() {
 
   return (
     <>
+      <Top title="Problemas na entrega" />
       <Grid>
         <section>
           <strong>Encomenda</strong>

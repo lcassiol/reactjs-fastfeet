@@ -38,7 +38,6 @@ export default function NewOrEditDeliveryMan({ match }) {
       setEmail(email);
 
       if (avatar) {
-        console.log(avatar.url);
         setAvatar(avatar.id);
         setAvatarUrl(avatar.url);
       }
@@ -75,7 +74,6 @@ export default function NewOrEditDeliveryMan({ match }) {
         toast.success('Entregador criado com sucesso!');
       }
     } catch (err) {
-      console.log(err);
       if (err instanceof Yup.ValidationError) {
         const errorMessages = [];
 

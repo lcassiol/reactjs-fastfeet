@@ -32,7 +32,7 @@ export const Container = styled.div`
   }
 
   .popup-content {
-    width: 208px !important;
+    width: 208px;
   }
 `;
 
