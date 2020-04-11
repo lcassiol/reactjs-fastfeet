@@ -9,8 +9,6 @@ import ProblemItem from './components/ProblemsItem';
 import { Grid, Button, PaginationControl } from './styles';
 
 export default function Problems() {
-  const history = useHistory();
-
   const [problems, setProblems] = useState([]);
   const [nextPageEmpty, setNextPageEmpty] = useState(false);
   const [endList, setEndList] = useState(true);
@@ -19,8 +17,6 @@ export default function Problems() {
   useEffect(() => {
     loadProblems();
   }, [page]); //eslint-disable-line
-
-  function handleSearch() {}
 
   async function loadProblems() {
     const response = await api.get('/delivery-problems', {
@@ -58,7 +54,11 @@ export default function Problems() {
           <strong>Ações</strong>
         </section>
         {problems.map((problem) => (
-          <ProblemItem key={problem.id} data={problem} />
+          <ProblemItem
+            key={problem.id}
+            loadProblems={loadProblems}
+            data={problem}
+          />
         ))}
       </Grid>
       <PaginationControl>

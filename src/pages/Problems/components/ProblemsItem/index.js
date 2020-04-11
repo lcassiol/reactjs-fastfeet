@@ -11,27 +11,28 @@ import { colors } from '~/styles/colors';
 
 import { Container, MoreContainer } from './styles';
 
-export default function ProblemsItem({ data, updateDeliveries }) {
+export default function ProblemsItem({ data, loadProblems }) {
   async function handleDelete() {
-    const confirm = window.confirm('Você tem certeza que deseja deletar isso?');
+    const confirm = window.confirm(
+      'Você tem certeza que deseja cancelar esta entrega?'
+    );
 
     if (!confirm) {
-      toast.error('Encomenda não apagada!');
       return;
     }
 
     try {
-      await api.delete(`/deliveries/${data.id}`);
-      updateDeliveries();
-      toast.success('Encomenda apagada com sucesso!');
+      await api.delete(`/problem/${data.id}/cancel-delivery`);
+      loadProblems();
+      toast.success('Entrega cancelada com sucesso!');
     } catch (err) {
-      toast.error('Essa encomenda não pode ser deletada!');
+      toast.error('Esta entrega nao pôde ser cancelada!');
     }
   }
 
   return (
     <Container>
-      <small>#{data.id}</small>
+      <small>#{data.delivery.id}</small>
       <small>{data.description}</small>
       <More>
         <MoreContainer>
