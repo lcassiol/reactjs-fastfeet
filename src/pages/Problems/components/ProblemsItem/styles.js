@@ -30,10 +30,6 @@ export const Container = styled.div`
     justify-content: flex-end;
     align-items: center;
   }
-
-  .popup-content {
-    width: 208px;
-  }
 `;
 
 export const MoreContainer = styled.div`
