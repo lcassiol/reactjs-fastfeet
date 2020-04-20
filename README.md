@@ -6,16 +6,16 @@ Este projeto faz parte do desafio final do curso GoStack da Rocketseat
 
 **Gerenciar Entregas**<br>
 <img src="https://github.com/lcassiol/reactjs-fastfeet/blob/master/src/assets/screenshots/Deliveries.png" 
-alt="IMAGE ALT TEXT HERE" width="800" height="530" border="10" /><br><br>
+alt="gerenciar-entregas" width="800" height="530" border="10" /><br><br>
 **Gerenciar Entregadores**<br>
 <img src="https://github.com/lcassiol/reactjs-fastfeet/blob/master/src/assets/screenshots/Couriers.png" 
-alt="IMAGE ALT TEXT HERE" width="800" height="530" border="10" /><br><br>
+alt="gerenciar-entregadores" width="800" height="530" border="10" /><br><br>
 **Gerenciar Destinatários**<br>
 <img src="https://github.com/lcassiol/reactjs-fastfeet/blob/master/src/assets/screenshots/Recipients.png" 
-alt="IMAGE ALT TEXT HERE" width="800" height="530" border="10" /><br><br>
+alt="gerenciar-destinatarios" width="800" height="530" border="10" /><br><br>
 **Gerenciar Problemas na entrega**<br>
 <img src="https://github.com/lcassiol/reactjs-fastfeet/blob/master/src/assets/screenshots/Delivery-problems.png" 
-alt="IMAGE ALT TEXT HERE" width="800" height="530" border="10" /><br><br>
+alt="gerenciar-problemas-na-entrega" width="800" height="530" border="10" /><br><br>
 
 
 -- Após o download dar o comando `yarn` para instalar as dependências do projeto e em seguida
